@@ -1,13 +1,25 @@
 #------------------------------------------------------------------------
 rm(list=ls(all=TRUE))
 
-library('data.table')
+packages <- c("data.table", "sparklyr")
+installed_packages <- installed.packages()
+
+for(pkg in packages) {
+  print(pkg)
+  if(!pkg %in% installed_packages) {
+    install.packages(pkg)
+  }
+}
+
+library(data.table)
+library(sparklyr)
+
 #Count number of rows
 ##nrow(data.table::fread('/Users/wesleyloubar/Documents/USP - PPGEE/PCS5031 - Introdução à Ciência dos Dados/Artigo/arm_data/arm_data.csv'))
-nrow(data.table(Sys.env("ARM_DATA")))
+#nrow(data.table(Sys.env("ARM_DATA")))
 #nrow(read.csv(dataurl, header= T/F))
 
-dataurl <- Sys.env("ARM_DATA")
+dataurl <- Sys.getenv("ARM_DATA")
 
 #read csv file
 co_mean <- c(0)
