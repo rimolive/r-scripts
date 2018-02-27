@@ -1,15 +1,15 @@
 #------------------------------------------------------------------------
 rm(list=ls(all=TRUE))
 
-packages <- c("data.table", "sparklyr")
-installed_packages <- installed.packages()
+#packages <- c("data.table", "sparklyr")
+#installed_packages <- installed.packages()
 
-for(pkg in packages) {
-  print(pkg)
-  if(!pkg %in% installed_packages) {
-    install.packages(pkg)
-  }
-}
+#for(pkg in packages) {
+#  print(pkg)
+#  if(!pkg %in% installed_packages) {
+#    install.packages(pkg)
+#  }
+#}
 
 library(data.table)
 library(sparklyr)
