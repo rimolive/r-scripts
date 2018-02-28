@@ -22,7 +22,7 @@ sc <- spark_connect(master = "local")
 #nrow(data.table(Sys.env("ARM_DATA")))
 #nrow(read.csv(dataurl, header= T/F))
 
-dataurl <- paste(Sys.getenv("ARM_DATA"), "maoaoscoS1.b1", "test.tsv, sep="/")
+dataurl <- paste(Sys.getenv("ARM_DATA"), "maoaoscoS1.b1", "test.tsv", sep="/")
 
 #read csv file
 co_mean <- c(0)
@@ -35,7 +35,7 @@ h2o_stdev <- c(0)
 
 summ_data <- data.table()
 
-for(i in 1:699){
+for(i in 1:699) {
   arm_data <- read.delim(dataurl, header = T, stringsAsFactors = F, skip = (1+(i-1)*86400), nrows = 86400) 
   colnames(arm_data) <- c("DATA","CO","N2","H2O")
 
