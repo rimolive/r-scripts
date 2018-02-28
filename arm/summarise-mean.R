@@ -15,7 +15,9 @@ library(data.table)
 library(sparklyr)
 library(dplyr)
 
-sc <- spark_connect(master = "local")
+#sc <- spark_connect(master = "local")
+
+sc <- spark_connect(master = "spark://arm-cluster:7077")
 
 #Count number of rows
 ##nrow(data.table::fread('/Users/wesleyloubar/Documents/USP - PPGEE/PCS5031 - Introdução à Ciência dos Dados/Artigo/arm_data/arm_data.csv'))
@@ -41,8 +43,11 @@ for(i in 1:699) {
 
   arm_data_tbl <- copy_to(sc, arm_data)
 
-  summ_data$CO_MEAN <- arm_data %>%
+  co_mean <- arm_data %>%
     summarise(co_mean=mean(arm_data_tbl$CO, na.rm = TRUE))
+
+  summ_data %>%
+    mutate(CO_MEAN = co_mean)
   
   #co_mean[i] = mean(arm_data$CO, na.rm = TRUE)
   #n2_mean[i] = mean(arm_data$N2, na.rm = TRUE)
